@@ -1,0 +1,16 @@
+{
+  "name": "padels-scraper",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "poll": "tsx src/poll.ts",
+    "clubs": "tsx src/clubs.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3",
+    "@types/node": "^22.10.7",
+    "dotenv": "^16.5.0"
+  }
+}

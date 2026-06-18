@@ -1,0 +1,7 @@
+name = "padels-analytics"
+compatibility_date = "2026-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "padels-scraper-db"
+database_id = "cd7e830e-75b2-49bf-9312-43baa4d3555f"

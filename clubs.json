@@ -1,0 +1,22 @@
+{
+  "poll": {
+    "opening_window_local": [
+      "07:00",
+      "23:00"
+    ],
+    "opening_days_ahead": 1,
+    "horizon_days_ahead": 7
+  },
+  "clubs": [
+    {
+      "alias": "padelzentrum-fulda-",
+      "tenant_id": "64936a90-bfd4-431e-89ef-d4490845933d",
+      "name": "Padelzentrum Fulda ",
+      "city": "Eichenzell",
+      "lat": 50.48002945,
+      "lon": 9.72769773,
+      "timezone": "Europe/Berlin",
+      "active": true
+    }
+  ]
+}
