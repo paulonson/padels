@@ -1,7 +1,11 @@
 name = "padels-analytics"
 compatibility_date = "2026-01-01"
+main = "src/worker/index.ts"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "padels-scraper-db"
 database_id = "cd7e830e-75b2-49bf-9312-43baa4d3555f"
+
+[triggers]
+crons = ["0 2 * * *"]  # 02:00 UTC täglich, nach dem horizon-Poll (01:15 UTC)
