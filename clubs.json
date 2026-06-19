@@ -17,6 +17,36 @@
       "lon": 9.72769773,
       "timezone": "Europe/Berlin",
       "active": true
+    },
+    {
+      "alias": "padelmotion",
+      "tenant_id": "a51996c7-343f-4ff5-b6c9-902fbf06ba7a",
+      "name": "Padelmotion",
+      "city": "Weingarten",
+      "lat": 47.8176303,
+      "lon": 9.6364605,
+      "timezone": "Europe/Berlin",
+      "active": true
+    },
+    {
+      "alias": "padelon-heilbronn",
+      "tenant_id": "dfa5c03d-3e19-4e7a-a01b-b58b7f0f23ff",
+      "name": "Padelon Heilbronn",
+      "city": "Heilbronn",
+      "lat": 49.1636318,
+      "lon": 9.1799538,
+      "timezone": "Europe/Berlin",
+      "active": true
+    },
+    {
+      "alias": "padelschmiede-rastatt",
+      "tenant_id": "06a50b0a-a4ac-406f-846b-ef5aa1edba0b",
+      "name": "Padelschmiede Rastatt",
+      "city": "Rastatt",
+      "lat": 48.865504,
+      "lon": 8.2208351,
+      "timezone": "Europe/Berlin",
+      "active": true
     }
   ]
 }

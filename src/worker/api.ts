@@ -70,6 +70,20 @@ export async function handleRequest(request: Request, db: D1Database): Promise<R
       return Response.json(row ?? null, { headers: JSON_HEADERS });
     }
 
+    // /api/compare/fillcurve?weekday=&hour=
+    if (path === '/api/compare/fillcurve') {
+      const weekday = url.searchParams.get('weekday') ?? '0';
+      const hour = url.searchParams.get('hour') ?? '0';
+      const rows = await db.prepare(`
+        SELECT fc.tenant_id, c.name, fc.lead_days, fc.p_booked, fc.n
+        FROM fill_curve fc
+        JOIN clubs c ON c.tenant_id = fc.tenant_id
+        WHERE c.active = 1 AND fc.weekday = ? AND fc.hour_utc = ?
+        ORDER BY fc.tenant_id, fc.lead_days
+      `).bind(weekday, hour).all();
+      return Response.json(rows.results, { headers: JSON_HEADERS });
+    }
+
     return new Response('Not Found', { status: 404 });
   } catch (e) {
     const msg = e instanceof Error ? e.message : String(e);
