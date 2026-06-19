@@ -1,4 +1,5 @@
 import { runEtl } from './etl.js';
+import { runOpeningPoll, runHorizonPoll } from './pollInWorker.js';
 import { handleRequest } from './api.js';
 
 interface Env {
@@ -6,9 +7,14 @@ interface Env {
 }
 
 export default {
-  // Nächtlicher ETL-Cron (02:00 UTC)
-  async scheduled(_event: ScheduledController, env: Env, ctx: ExecutionContext): Promise<void> {
-    ctx.waitUntil(runEtl(env.DB));
+  async scheduled(event: ScheduledController, env: Env, ctx: ExecutionContext): Promise<void> {
+    if (event.cron === '0 2 * * *') {
+      ctx.waitUntil(runEtl(env.DB));
+    } else if (event.cron === '15 1 * * *') {
+      ctx.waitUntil(runHorizonPoll(env.DB));
+    } else {
+      ctx.waitUntil(runOpeningPoll(env.DB));
+    }
   },
 
   // HTTP-Anfragen: API + Dashboard + manueller ETL-Trigger

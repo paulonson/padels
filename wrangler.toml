@@ -8,4 +8,8 @@ database_name = "padels-scraper-db"
 database_id = "cd7e830e-75b2-49bf-9312-43baa4d3555f"
 
 [triggers]
-crons = ["0 2 * * *"]  # 02:00 UTC täglich, nach dem horizon-Poll (01:15 UTC)
+crons = [
+  "15 1 * * *",      # Horizon-Poll: täglich 01:15 UTC
+  "2,32 5-20 * * *", # Opening-Poll: alle 30 min, 07:02–22:32 Berlin
+  "0 2 * * *",       # ETL: täglich 02:00 UTC
+]
