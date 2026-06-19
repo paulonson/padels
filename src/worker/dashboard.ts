@@ -152,7 +152,7 @@ function renderHeatmap(cells, tenantId){
       const c=lookup[wd+'_'+h];
       const bg=c?util2color(c.utilization,c.confident):'#f7f7f7';
       const tt=c?day+' '+h+'h UTC – '+pct(c.utilization)+' (n='+c.n+(c.confident?'':'⬜')+')':'';
-      html+='<td class="cell" style="background:'+bg+'" title="'+tt+'" onclick="loadFillCurve(\''+tenantId+'\','+wd+','+h+')"></td>';
+      html+='<td class="cell" style="background:'+bg+'" title="'+tt+'" onclick="loadFillCurve(\\''+tenantId+'\\','+wd+','+h+')"></td>';
     });
     html+='</tr>';
   });
