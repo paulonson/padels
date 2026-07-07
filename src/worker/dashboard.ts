@@ -67,6 +67,10 @@ table.hm{border-collapse:separate;border-spacing:2px;font-size:.72rem}
   <div class="tabs">
     <div class="tab active" id="tabBtnSingle" onclick="switchTab('single')">Einzelclub</div>
     <div class="tab" id="tabBtnCompare" onclick="switchTab('compare')">Vergleich</div>
+    <div style="margin-left:auto;display:flex;align-items:center;gap:10px;padding-bottom:6px">
+      <span id="exportStatus" style="font-size:.8rem;color:#888"></span>
+      <button class="btn" onclick="exportJson()">&#11015; Export (JSON)</button>
+    </div>
   </div>
 
   <!-- ===== EINZELCLUB-TAB ===== -->
@@ -305,6 +309,24 @@ async function triggerEtl(){
     const txt=await r.text();
     s.textContent='✓ '+txt.split('\\n').at(-2)||'fertig';
     setTimeout(()=>{ const sel=document.getElementById('clubSel'); loadClub(sel.value); },1000);
+  }catch(e){ s.textContent='Fehler: '+e; }
+}
+
+async function exportJson(){
+  const s=document.getElementById('exportStatus');
+  s.textContent='Export läuft…';
+  try{
+    const r=await fetch('/api/export');
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const blob=await r.blob();
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url;
+    a.download='padels-export-'+new Date().toISOString().slice(0,10)+'.json';
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+    s.textContent='✓ heruntergeladen';
+    setTimeout(()=>{ s.textContent=''; }, 4000);
   }catch(e){ s.textContent='Fehler: '+e; }
 }
 

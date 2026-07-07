@@ -1,4 +1,5 @@
 import { getDashboardHtml } from './dashboard.js';
+import { getExportJson } from './export.js';
 
 const JSON_HEADERS = { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' };
 const HTML_HEADERS = { 'Content-Type': 'text/html; charset=utf-8' };
@@ -82,6 +83,13 @@ export async function handleRequest(request: Request, db: D1Database): Promise<R
         ORDER BY fc.tenant_id, fc.lead_days
       `).bind(weekday, hour).all();
       return Response.json(rows.results, { headers: JSON_HEADERS });
+    }
+
+    if (path === '/api/export') {
+      const doc = await getExportJson(db);
+      return Response.json(doc, {
+        headers: { ...JSON_HEADERS, 'Content-Disposition': 'attachment; filename="padels-export.json"' },
+      });
     }
 
     return new Response('Not Found', { status: 404 });
